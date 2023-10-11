@@ -1,0 +1,135 @@
+KNN-2
+Assignment Questions 
+Assignment 
+Q1. What is the main difference between the Euclidean distance metric and the Manhattan distance  metric in KNN? How might this difference affect the performance of a KNN classifier or regressor? 
+Euclidean Distance and Manhattan Distance are popular distance metrics used in K-Nearest Neighbors (KNN) algorithm. The main differences between them lie in how they calculate the distance between two points in the feature space.
+Euclidean Distance:
+Also known as L2 distance.
+It calculates the shortest straight-line distance between two points.
+In a 2D space, it corresponds to the length of the hypotenuse in the right-angled triangle formed by the points.
+Manhattan Distance:
+Also known as L1 distance or City Block distance.
+It calculates the distance by summing the absolute differences between the coordinates of the points.
+In a 2D space, it corresponds to the distance traveled along the grid-like path between the points.
+Impact on KNN performance:
+The choice of distance metric can significantly impact the performance of a KNN classifier or regressor.
+Euclidean Distance tends to give more importance to large differences in one feature, which can lead to dominance by features with larger scales. This may not be desirable when all features should be treated equally.
+Manhattan Distance, by summing absolute differences, is less sensitive to outliers and focuses on the overall difference in all dimensions rather than the magnitude of a single dimension.
+Depending on the dataset and problem, one distance metric may be more appropriate than the other. It's common to try both and evaluate the model performance to choose the better option.
+
+Q2. How do you choose the optimal value of k for a KNN classifier or regressor? What techniques can be  used to determine the optimal k value? 
+Grid Search with Cross-Validation:
+Use a grid search with cross-validation to evaluate the model's performance for different
+k values.
+Train the KNN model using each
+       k and evaluate using a scoring metric (e.g., accuracy for classification, mean squared error for regression) in a cross-validation setup.
+Choose the k that gives the best performance.
+Domain Knowledge and Experimentation:
+Leverage domain knowledge and problem-specific insights to choose an initial
+k value.
+Experiment with different
+k values and evaluate model performance to fine-tune
+k based on observed results.
+Rule of Thumb:
+A common rule of thumb is to take
+k as the square root of the number of data points.
+
+Q3. How does the choice of distance metric affect the performance of a KNN classifier or regressor? In  what situations might you choose one distance metric over the other? 
+Euclidean Distance (L2 norm):
+Effect on Performance:
+Emphasizes large differences in one feature, which might be undesirable when all features should be treated equally.
+Sensitive to scale differences between features.
+When to Choose:
+Use when features have similar scales or when considering the magnitude of differences in all features.
+Suitable when differences in one feature should significantly affect the distance.
+Manhattan Distance (L1 norm or City Block distance):
+Effect on Performance:
+Less sensitive to outliers and feature scales due to absolute differences.
+Focuses on the overall difference in all dimensions rather than emphasizing a single dimension.
+When to Choose:
+Use when features have different scales or when you want to reduce the influence of outliers.
+Suitable when each feature is equally important or when you want to consider overall differences.
+
+Q4. What are some common hyperparameters in KNN classifiers and regressors, and how do they affect  the 
+performance of the model? How might you go about tuning these hyperparameters to improve  model performance? 
+Number of Neighbors (
+�
+k):
+Effect on Model:
+Determines the number of neighbors considered when making predictions.
+Smaller
+�
+k leads to a more sensitive model, potentially capturing finer patterns but being more affected by noise.
+Larger
+�
+k provides a smoother decision boundary but might miss local patterns.
+Tuning: Choose an appropriate
+�
+k using techniques like cross-validation, the elbow method, or domain knowledge.
+Distance Metric:
+Effect on Model:
+Specifies the distance measure used to calculate proximity between data points.
+Choice of distance metric significantly influences the model's sensitivity to feature scales and outliers.
+Tuning: Experiment with different distance metrics (e.g., Euclidean, Manhattan) to see which fits the problem best.
+Algorithm for Finding Neighbors:
+Effect on Model:
+Specifies the algorithm used to find the nearest neighbors (e.g., Ball Tree, KD Tree, brute force).
+Choice affects the speed and memory usage of the model.
+Tuning: Based on the dataset size and dimensionality, experiment with different algorithms to find the optimal balance between speed and accuracy.
+Leaf Size (for tree-based algorithms):
+Effect on Model:
+Determines the number of points at which the algorithm switches to brute force (affects speed and memory).
+Tuning: Adjust based on dataset size and dimensionality to optimize the algorithm's efficiency.
+Cross-validation Strategy:
+Effect on Model:
+Determines how the model's performance is evaluated during hyperparameter tuning.
+Tuning: Choose an appropriate cross-validation strategy (e.g., k-fold, stratified k-fold) based on the dataset size and characteristics.
+
+Q5. How does the size of the training set affect the performance of a KNN classifier or regressor? What  techniques can be used to optimize the size of the training set? 
+Effect of Training Set Size:
+Small Training Set:
+More sensitive to noise and outliers since a small number of neighbors can have a large impact.
+Overfitting is more likely due to capturing noise or specific patterns present in a small dataset.
+Large Training Set:
+Smoother decision boundaries as noise and outliers have less influence.
+Less sensitive to individual data points, promoting more robust generalization.
+Bias-Variance Trade-off:
+Bias: The error due to overly simplistic assumptions in the learning algorithm.
+Variance: The error due to too much complexity in the learning algorithm.
+As training set size increases, bias generally increases (towards simpler models), and variance decreases (towards more generalizable models).
+Techniques to Optimize Training Set Size:
+Cross-validation: Use techniques like k-fold cross-validation to assess the model's performance across different subsets of the training data. This can help you identify an optimal training set size that balances bias and variance.
+Learning Curves: Plot the model's performance (e.g., accuracy, mean squared error) against the training set size. Analyze how performance improves or stabilizes with more data. This can guide decisions on whether to collect more data.
+Bootstrapping: Utilize bootstrapping techniques to resample from the dataset with replacement. This can provide insights into the model's performance variance with different training set sizes.
+
+Q6. What are some potential drawbacks of using KNN as a classifier or regressor? How might you  overcome these drawbacks to improve the performance of the model? 
+Sensitivity to Distance Metric and
+�
+k Value:
+Drawback: The performance of KNN is sensitive to the choice of distance metric and the value of
+�
+k. Suboptimal choices can lead to inaccurate predictions.
+Improvement:
+Experiment with various distance metrics (e.g., Euclidean, Manhattan, Minkowski) to find the most appropriate one for the dataset.
+Use techniques like cross-validation or grid search to find the optimal
+�
+k value.
+Computationally Intensive for Large Datasets:
+Drawback: KNN involves calculating distances between the query point and all data points, making it computationally expensive for large datasets.
+Improvement:
+Consider using approximate nearest neighbor algorithms (e.g., locality-sensitive hashing) or tree-based structures (e.g., KD-trees) to speed up the search for nearest neighbors.
+Impacted by Outliers and Noisy Data:
+Drawback: KNN is sensitive to outliers and noisy data, which can significantly affect predictions.
+Improvement:
+Implement outlier detection techniques and robust preprocessing (e.g., outlier removal, data cleaning) to reduce the influence of outliers.
+Curse of Dimensionality:
+Drawback: In high-dimensional spaces, the performance of KNN deteriorates due to the "curse of dimensionality."
+Improvement:
+Apply dimensionality reduction techniques (e.g., PCA) to reduce the number of features and mitigate the curse of dimensionality.
+Difficulty Handling Missing Values:
+Drawback: KNN does not handle missing values well, and imputation methods can introduce bias.
+Improvement:
+Use specialized imputation techniques like KNN-based imputation to handle missing
+
+Note:  Create your assignment in Jupyter notebook and upload it to GitHub & share that github repository  link through your dashboard. Make sure the repository is public.
+Data Science Masters 
